@@ -1,4 +1,4 @@
-package com.fasterxml.jackson.failing;
+package com.fasterxml.jackson.core.json;
 
 import java.io.ByteArrayOutputStream;
 import java.io.StringWriter;
@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.*;
 
 import org.junit.jupiter.api.Test;
 
+import static com.fasterxml.jackson.core.JsonGenerator.Feature;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Surrogate223Test extends JUnit5TestBase
@@ -27,7 +28,7 @@ class Surrogate223Test extends JUnit5TestBase
 //        assertFalse(JSON_F.isEnabled(JsonGenerator.Feature.ESCAPE_UTF8_SURROGATES));
 
         out = new ByteArrayOutputStream();
-        g = JSON_F.createGenerator(out);
+        g = JSON_F.createGenerator(out).enable(Feature.COMBINE_UNICODE_SURROGATES);
         g.writeStartArray();
         g.writeString(toQuote);
         g.writeEndArray();
@@ -43,8 +44,7 @@ class Surrogate223Test extends JUnit5TestBase
 
         // but may revert back to original behavior
         out = new ByteArrayOutputStream();
-        g = JSON_F.createGenerator(out);
-//        g.enable(JsonGenerator.Feature.ESCAPE_UTF8_SURROGATES);
+        g = JSON_F.createGenerator(out).disable(Feature.COMBINE_UNICODE_SURROGATES);
         g.writeStartArray();
         g.writeString(toQuote);
         g.writeEndArray();
