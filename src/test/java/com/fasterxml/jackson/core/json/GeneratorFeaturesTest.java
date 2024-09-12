@@ -28,6 +28,7 @@ class GeneratorFeaturesTest
 
         assertFalse(g.isEnabled(JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN));
         assertFalse(g.isEnabled(StreamWriteFeature.WRITE_BIGDECIMAL_AS_PLAIN));
+        assertFalse(g.isEnabled(StreamWriteFeature.WRITE_UTF8_SURROGATES));
 
         assertTrue(g.canOmitFields());
         assertFalse(g.canWriteBinaryNatively());

@@ -74,6 +74,8 @@ public enum StreamWriteFeature
      */
     WRITE_BIGDECIMAL_AS_PLAIN(JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN),
 
+    WRITE_UTF8_SURROGATES(JsonGenerator.Feature.WRITE_UTF8_SURROGATES),
+
     // // Schema/Validity support features
 
     /**

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.*;
 
 import java.util.Random;
 
+import static com.fasterxml.jackson.core.JsonGenerator.Feature;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -84,6 +85,17 @@ class StringGenerationTest
                 _testLongerRandomMulti(mode, content, true, round);
             }
         }
+    }
+
+    @Test
+    public void testWritingSurrogatePairs() throws IOException {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        JsonGenerator generator = FACTORY.createGenerator(stream, JsonEncoding.UTF8).enable(Feature.WRITE_UTF8_SURROGATES);
+        String string = "システム\uD867\uDE3D"; // システム𩸽
+        generator.writeString(string);
+        generator.flush();
+        generator.close();
+        assertEquals("\"" + string + "\"", stream.toString());
     }
 
     /*

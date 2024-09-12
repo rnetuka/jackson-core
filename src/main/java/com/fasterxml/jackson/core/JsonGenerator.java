@@ -202,6 +202,8 @@ public abstract class JsonGenerator
          */
         WRITE_BIGDECIMAL_AS_PLAIN(false),
 
+        WRITE_UTF8_SURROGATES(false),
+
         // // Schema/Validity support features
 
         /**
